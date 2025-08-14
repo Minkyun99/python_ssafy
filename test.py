@@ -1,18 +1,23 @@
+import sys
+sys.stdin = open('input.txt')
 
-N = int(input())
-arr = [list(input()) for _ in range(8)]
+for time in range(1, 11):
+    N = int(input())
+    arr = list(input())
+    postfix = []
 
-t_count = 0
+    stack = [''] * N
+    top = -1
 
-for i in range(8):
-    count = 0
-    for j in range(8):
-        for idx in range(1, N//2):
-            if i-idx < 0 or i-idx >= 8 or j+idx < 0 or j+idx >= 8:
-                if arr[i-idx][j-idx] != arr[i+idx][j+idx]:
-                    break
-                count += 1
-        if count > 0:
-            t_count += count
+    for token in arr:
+        if token in '+':
+            top += 1
+            stack[top] = token
+        else:
+            postfix += str(token)
 
-    print(t_count)
+    item = 0
+    for i in postfix:
+        item += int(i)
+
+    print(f'#{time} {item}')
