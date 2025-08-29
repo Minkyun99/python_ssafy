@@ -1,22 +1,32 @@
-import math
+import sys
+sys.stdin = open('input.txt')
 
-def function(a, b):
-    x, y = 0, 0
-    power = 50
+K = int(input())
+arr = []
 
-    x1 = 2**(a - x)
-    y1 = 2**(b - y)
+for i in range(6):
+    arr += [list(map(int,input().split()))]
 
-    theta = math.atan2(y1, x1)
+t = []
 
-    c = math.cos(theta) * power
-    s = math.sin(theta) * power
+x = 0
+y = 0
 
-    return(c,s)
+for j in range(6) :
+    if arr[j][0] == 4:
+        y = y + arr[j][1]
+        t.append([x, y])
+    elif arr[j][0] == 3:
+        y = y - arr[j][1]
+        t.append([x, y])
+    elif arr[j][0] == 2:
+        x = x - arr[j][1]
+        t.append([x, y])
+    else:
+        x= x + arr[j][1]
+        t.append([x, y])
 
-    
-result = function(5, 3)    
-print(result)
+print(t)
 
 
-    
+for i in range(3): 

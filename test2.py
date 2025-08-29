@@ -1,44 +1,40 @@
 import sys
 sys.stdin = open('input.txt')
 
-T = int(input())
+N = int(input())
+p = [0] * (N+1)
+left = [0] * (N+1)
+right = [0] * (N+1)
+arr = []
+for i in range(1, N+1):
+    arr += [list(input().split())]
 
-for time in range(1, T+1):
-    arr = [list(map(int, input().split())) for _ in range(9)]
+cal = {'+':1, '-': 1, '*':2, '/':2}
 
-    isTwice = False
-
-    for i in range(9):
-        total = []
-        c_total = []
-        for j in range(9):
-            if arr[i][j] not in total and arr[j][i] not in c_total: 
-                total.append(arr[i][j])
-                c_total.append(arr[j][i])
-            else:
-                print(arr[i][j], i, j, '중복')
-                isTwice = True
-                total = []
-                c_total = []
-                break
-            for m in range(0, 9, 3):
-                for n in range(0, 9, 3):
-                    total_square = []
-                    for c in range(3):
-                        for r in range(3):
-                            a = m + c
-                            b = n + r
-                            if a < 0 or a >= 9 or b < 0 or b >= 9:
-                                break
-                            if arr[a][b] not in total_square:
-                                total_square.append(arr[a][b])
-                            else:
-                                isTwice = True
-                                total_square = []
-                                break    
-            if isTwice == True:
-                break
-    if isTwice == True:
-        print(f'#{time} 0')
+for j in range(N):
+    if arr[j][1] not in cal:
+        if j % 2 == 0:
+            left[j+1] = int(arr[j][1])
+        else:
+            right[j+1] = int(arr[j][1])
     else:
-        print(f'#{time} 1')
+        if int(arr[j][0]) % 2 == 0:
+            left[int(arr[j][0])] = arr[j][1]
+        else:
+            right[int(arr[j][0])] = arr[j][1]
+
+
+def pre_order(v):
+    if v == 0:
+        return
+    
+    pre_order(left(v))
+
+    pre_order(right(v))
+    
+    if pre_order(v) == '-':
+        return left(v*2) - right(v*2+1)
+    else:
+        return left(v*2) * right(v*2+1)
+    
+result = pre_order(0)
