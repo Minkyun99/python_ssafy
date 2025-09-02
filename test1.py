@@ -1,32 +1,27 @@
 import sys
 sys.stdin = open('input.txt')
 
-K = int(input())
-arr = []
+T = int(input())
 
-for i in range(6):
-    arr += [list(map(int,input().split()))]
+for time in range(1, T+1):
+    N = int(input())
+    arr = [0]
+    arr += list(map(int, input().split()))
 
-t = []
+    bulb = [0]* (N+1)
 
-x = 0
-y = 0
+    count = 0
+    for i in range(1, N+1):
+        if arr[i] != bulb[i]:
+            count += 1
+            for j in range(i, N+1, i):
+                if bulb[j] == 1:
+                    bulb[j] = 0
+                else:
+                    bulb[j] = 1
+    print(f'#{time} {count}')
 
-for j in range(6) :
-    if arr[j][0] == 4:
-        y = y + arr[j][1]
-        t.append([x, y])
-    elif arr[j][0] == 3:
-        y = y - arr[j][1]
-        t.append([x, y])
-    elif arr[j][0] == 2:
-        x = x - arr[j][1]
-        t.append([x, y])
-    else:
-        x= x + arr[j][1]
-        t.append([x, y])
-
-print(t)
+                
+                
 
 
-for i in range(3): 
