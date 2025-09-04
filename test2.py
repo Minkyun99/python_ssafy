@@ -1,40 +1,37 @@
 import sys
 sys.stdin = open('input.txt')
 
-N = int(input())
-p = [0] * (N+1)
-left = [0] * (N+1)
-right = [0] * (N+1)
-arr = []
-for i in range(1, N+1):
-    arr += [list(input().split())]
 
-cal = {'+':1, '-': 1, '*':2, '/':2}
-
-for j in range(N):
-    if arr[j][1] not in cal:
-        if j % 2 == 0:
-            left[j+1] = int(arr[j][1])
-        else:
-            right[j+1] = int(arr[j][1])
-    else:
-        if int(arr[j][0]) % 2 == 0:
-            left[int(arr[j][0])] = arr[j][1]
-        else:
-            right[int(arr[j][0])] = arr[j][1]
-
-
-def pre_order(v):
-    if v == 0:
+def find_way(arr, x, y, result,visited, N):
+    global M
+    if x < 0 or x >= N or y < 0 or y >= N:
         return
     
-    pre_order(left(v))
+    if len(result) == N:
+        total = sum(result)
+        if total < M:
+            M = total
+        result = []
+        return
+    
+    for i in range(N):
+        if i not in visited:
+            result.append(arr[x][i])
+            visited.append(i)
+            find_way(arr, x + 1, i, result, visited, N)
+            visited.pop()
 
-    pre_order(right(v))
+
     
-    if pre_order(v) == '-':
-        return left(v*2) - right(v*2+1)
-    else:
-        return left(v*2) * right(v*2+1)
+T = int(input())
+
+for time in range(1, T+1):
+
+    N = int(input())
+    M = 100*N
+    arr = [list(map(int, input().split())) for _ in range(N)]
+
+    a = find_way(arr, 0, 0, [], [], N)
+
+    print(f'#{time} {M}')
     
-result = pre_order(0)
