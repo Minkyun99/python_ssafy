@@ -2,23 +2,30 @@ import sys
 sys.stdin = open('input.txt')
 
 
-def find_way(arr, x, y, result,visited, N):
-    global M
-    if x < 0 or x >= N or y < 0 or y >= N:
-        return
+def find_way(arr, x, N):
+    global M, visited, result
     
-    if len(result) == N:
-        total = sum(result)
+    if len(visited) == N and visited[0] == 0:
+        result = [0] * N*2
+        for i in range(1, len(result)-1, 2):
+            result[i] = visited[i//2]
+            result[i+1] = visited[i//2]
+        print(result)
+        total = 0
+        for j in range(0, len(result), 2):
+            total += arr[result[j]][result[j+1]]
+
         if total < M:
             M = total
+        
         result = []
+        
         return
     
     for i in range(N):
-        if i not in visited:
-            result.append(arr[x][i])
+        if i not in visited :
             visited.append(i)
-            find_way(arr, x + 1, i, result, visited, N)
+            find_way(arr, i, N)
             visited.pop()
 
 
@@ -26,12 +33,13 @@ def find_way(arr, x, y, result,visited, N):
 T = int(input())
 
 for time in range(1, T+1):
-
+    result = []
     N = int(input())
     M = 100*N
+    visited = []
     arr = [list(map(int, input().split())) for _ in range(N)]
 
-    a = find_way(arr, 0, 0, [], [], N)
+    find_way(arr, 0, N)
 
     print(f'#{time} {M}')
     

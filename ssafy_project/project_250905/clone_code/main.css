@@ -1,0 +1,152 @@
+.story-script-regular {
+  font-family: "Story Script", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+    font-family: "Story Script";
+}
+body {
+    margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    text-align: var(--bs-body-text-align);
+    background-color: rgb(219, 219, 219);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.navbar-brand > span {
+    font-size: 80px;
+}
+
+.navbar > .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+}
+
+#searchbar {
+    width: 500px;
+}
+
+.content {
+    margin-top: 20px;
+    display: flex;
+}
+
+.sidebar {
+    padding: 0 50px 0 50px;
+    /* background-color: white; */
+}
+
+.sidebar > ul {
+    margin-top: 20px;
+    width: 80%;
+    border-right: 1px solid rgb(168, 168, 168);
+}
+
+.sidebar > ul li {
+    margin: 20px 0;
+    border-bottom: none;
+}
+
+.sidebar > ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.sidebar > ul li a:hover {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.w-100 {
+    height: 33rem;
+}
+
+.card {
+    margin-top: 30px;
+}
+
+
+.card-header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.card-header > span {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.profile_img {
+    width: 65px;
+    height: 65px;
+}
+
+.profile_img > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    margin-right: 15px;
+}
+
+.click_heart {
+    /* height: 60px; */
+    margin: 10px 0;
+}
+
+.click_heart img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.click_heart img:hover {
+    width: 50px;
+    height: 50px;
+    margin-right: 0px;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-text {
+    margin-bottom: 3px;
+}
+
+.content_message {
+    height: 30px;
+    overflow-y: clip;
+}
+
+.btn-outline-secondary {
+    /* --bs-btn-color: white; */
+    /* --bs-btn-border-color: white; */
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #6c757d;
+    --bs-btn-hover-border-color: #6c757d;
+    --bs-btn-focus-shadow-rgb: 108, 117, 125;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #6c757d;
+    --bs-btn-active-border-color: #6c757d;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #6c757d;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #6c757d;
+    --bs-gradient: none;
+}
+
+@media screen and (min-width:1400px) {
+    .content {
+        width: 1400px;
+    }
+}
