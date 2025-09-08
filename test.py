@@ -1,34 +1,41 @@
 import sys
 sys.stdin = open('input.txt')
 
+
 T = int(input())
 
-for time in range(1, T + 1):
-    N, M = map(int,input().split())
+for time in range(1, T+1):
+    N, M = map(int, input().split())
 
-    arr = [list(input()) for _ in range(N)]
+    container = list(map(int, input().split()))
+    truck = list(map(int, input().split()))
 
-    No_same = []
-    color = ['W', 'R', 'B']
-    count = [[0] * 3 for _ in range(N)]
+    container = sorted(container)
+    truck = sorted(truck)
 
-    for i in range(N):
-        result = [0] * 3
-        for j in range(M-1):
-            if arr[i][j] != arr[i][j+1]:
-                No_same.append(i)
-                break
-            if arr[i][j] == 'W':
-                result[0] += 1
-            elif arr[i][j] == 'R':
-                result[1] += 1
+    count = 0
+    
+    if len(container) > len(truck):
+        while truck:
+            a = container.pop()
+            b = truck.pop()
+            if a <= b:
+                count += a
             else:
-                result[2] += 1
-        
-        for x in range(3):
-            count[i][x] = result[x]
-        
+                truck.append(b)
+    elif len(container) == len(truck):
+        for i in range(len(container)):
+            if container[i] <= truck[i]:
+                count += container[i]
+    else:
+        while container:
+            a = container.pop()
+            b = truck.pop()
+            if a <= b:
+                count += a
+            else:
+                truck.append(b)
 
 
-    print(No_same)
-    print(count)
+    print(f'#{time} {count}')
+            
