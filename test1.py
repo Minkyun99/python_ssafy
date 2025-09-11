@@ -1,27 +1,43 @@
 import sys
 sys.stdin = open('input.txt')
 
-T = int(input())
+x1 = [0] * 3
+y1 = [0] * 3
+x2 = [0] * 3
+y2 = [0] * 3
 
-for time in range(1, T + 1):
-    N, M = map(int, input().split())
+x1[0], y1[0], x2[0], y2[0] = map(int, input().split())
+x1[1], y1[1], x2[1], y2[1] = map(int, input().split())
+x1[2], y1[2], x2[2], y2[2] = map(int, input().split())
 
-    container = list(map(int, input().split()))
-    truck = list(map(int, input().split()))
 
-    container.sort(reverse=True)
-    truck.sort(reverse=True)
+rec_arr = [[0]*2000 for _ in range(2000)]
 
-    total_weight = 0
-    container_idx = 0
-    truck_idx = 0
-    
-    while container_idx < len(container) and truck_idx < len(truck):
-        if truck[truck_idx] >= container[container_idx]:
-            total_weight += container[container_idx]
-            truck_idx += 1
-            container_idx += 1
-        else:
-            container_idx += 1
 
-    print(f'#{time} {total_weight}')
+
+for idx in range(3):
+    for i in range(x1[idx]+1000, x2[idx]+1000):
+        for j in range(y1[idx]+1000, y2[idx]+1000):
+            rec_arr[i][j] += 1
+
+
+
+M = (x2[2] - x1[2]) * (y2[2] - y1[2])
+
+
+count = 0
+minus_count = 0
+for i in range(2000):
+    for j in range(2000):
+        if rec_arr[i][j] == 1:
+            count += 1
+        elif rec_arr[i][j] == 2:
+            minus_count += 1
+
+
+
+print(count - (M - minus_count))
+
+
+
+
