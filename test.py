@@ -1,18 +1,22 @@
 import sys
 sys.stdin = open('input.txt')
 
-N, M, K = map(int, input().split())
-student = [int(input()) for _ in range(M)]
 
-count_arr = [0] * (N+1)
-result = 0
+n = int(input())
+grid = [list(map(int, input().split())) for _ in range(n)]
 
+# Please write your code here.
+max_value = 0
+for i in range(n):
+    for j in range(n):
+        count = 0
+        for idx in range(3):
+            r = j + idx
+            if r < 0 or r >= n:
+                continue
+            count += grid[i][r] 
 
-for i in range(M):
-    count_arr[student[i]] += 1
-    if count_arr[student[i]] >= K:
-        result = student[i]
-    if result > 0:
-        break
+        max_value = max(count, max_value)
 
-print(result)
+print(max_value)
+
